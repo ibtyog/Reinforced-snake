@@ -93,7 +93,7 @@ class SnakeEngine:
             if self.score % self.config["env"]["expand_every"] == 0:
                 self.extend_map()
         else:
-            self.snake.pop()  # Usuwamy ogon, bo nie zjadł
+            self.snake.pop()
 
         return reward, game_over, self.score
 
