@@ -34,3 +34,6 @@ class SnakeEnv(Env):
         info = {"score": score}
         
         return np.array(observation, dtype=np.float32), reward, terminated, truncated, info
+    
+    def render(self):
+        self.snake_engine.render()
