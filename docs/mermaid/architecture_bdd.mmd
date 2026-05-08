@@ -1,0 +1,25 @@
+graph TB
+    subgraph Environment_Module
+        E[engine.py]
+        SB[state_builder.py]
+        SE[snake_env.py]
+    end
+
+    subgraph Agent_Module
+        AG[dqn_agent.py]
+        M[memory.py]
+        NN[linear_net.py]
+    end
+
+    subgraph Core
+        TR[train.py]
+        CFG[configs/]
+    end
+
+    TR --> SE
+    SE --> E
+    E --> SB
+    SB --> TR
+    TR --> AG
+    AG --> NN
+    AG --> M

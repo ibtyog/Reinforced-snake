@@ -1,0 +1,15 @@
+sequenceDiagram
+    autonumber
+    participant T as Train/Orchestrator
+    participant E as SnakeEngine
+    participant S as StateBuilder
+    participant A as DQNAgent
+
+    T->>E: step(action)
+    E->>E: update_physics()
+    E->>T: raw_game_data
+    T->>S: build_state(raw_data)
+    S->>T: feature_vector
+    T->>A: store_and_train(state, reward)
+    A->>A: optimize_model()
+    A->>T: next_action
