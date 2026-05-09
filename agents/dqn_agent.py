@@ -34,7 +34,7 @@ class DQNAgent:
     def get_action(self, state):
         expl_prob = random.random()
         if expl_prob < self.epsilon:
-            return random.randint(0, 3)
+            return random.randint(0, 2)
         else:
             state_tensor = torch.tensor(state, dtype=torch.float32)
             q_values = self.model(state_tensor)
@@ -48,11 +48,11 @@ class DQNAgent:
         batch = self.memory.sample(self.batch_size)
         states, actions, rewards, next_states, dones = zip(*batch)
 
-        states = torch.tensor(states, dtype=torch.float32)
-        actions = torch.tensor(actions, dtype=torch.int64).unsqueeze(1)
-        rewards = torch.tensor(rewards, dtype=torch.float32).unsqueeze(1)
-        next_states = torch.tensor(next_states, dtype=torch.float32)
-        dones = torch.tensor(dones, dtype=torch.int).unsqueeze(1)
+        states = torch.tensor(np.array(states), dtype=torch.float32)
+        actions = torch.tensor(np.array(actions), dtype=torch.int64).unsqueeze(1)
+        rewards = torch.tensor(np.array(rewards), dtype=torch.float32).unsqueeze(1)
+        next_states = torch.tensor(np.array(next_states), dtype=torch.float32)
+        dones = torch.tensor(np.array(dones), dtype=torch.int).unsqueeze(1)
 
         q_values = self.model(states).gather(1, actions)
 
