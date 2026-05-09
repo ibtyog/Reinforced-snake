@@ -2,8 +2,8 @@ training:
   episodes: 50000
   render_every: 100        
   save_model: true
-  resume_training: false
-  resume_model_path: "best_model_score_67.pth"
+  resume_training: true
+  resume_model_path: "best_model_score_70.pth"
   render_video: false
   
 wandb:
