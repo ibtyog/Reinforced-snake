@@ -1,0 +1,11 @@
+env:
+  base_width: 20
+  base_height: 20
+  expand_every: 5
+  green_apple_prob: 0.3
+
+rewards:
+  red_apple: 10
+  green_apple: 20
+  death: -100
+  life_penalty: -0.1

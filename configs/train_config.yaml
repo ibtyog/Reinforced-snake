@@ -1,0 +1,12 @@
+training:
+  episodes: 50000
+  render_every: 100        
+  save_model: true
+  resume_training: false
+  resume_model_path: "best_model_score_67.pth"
+  render_video: false
+  
+wandb:
+  use_wandb: false         
+  project_name: "Snake-DQN"
+  run_name: "Reinforced_Snake_Training"

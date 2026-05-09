@@ -5,3 +5,4 @@ checkpoints/
 blankfile
 .vscode/
 saved_models/
+wandb/

@@ -1,0 +1,24 @@
+2026-05-09 12:23:32,758 INFO    MainThread:13840 [wandb_setup.py:_flush():81] Current SDK version is 0.26.1
+2026-05-09 12:23:32,758 INFO    MainThread:13840 [wandb_setup.py:_flush():81] Configure stats pid to 13840
+2026-05-09 12:23:32,758 INFO    MainThread:13840 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2026-05-09 12:23:32,758 INFO    MainThread:13840 [wandb_init.py:setup_run_log_directory():723] Logging user logs to C:\Users\vvv\Desktop\RL Snake\wandb\run-20260509_122332-q0074nal\logs\debug.log
+2026-05-09 12:23:32,758 INFO    MainThread:13840 [wandb_init.py:setup_run_log_directory():724] Logging internal logs to C:\Users\vvv\Desktop\RL Snake\wandb\run-20260509_122332-q0074nal\logs\debug-internal.log
+2026-05-09 12:23:32,758 INFO    MainThread:13840 [wandb_init.py:init():850] calling init triggers
+2026-05-09 12:23:32,758 INFO    MainThread:13840 [wandb_init.py:init():855] wandb.init called with sweep_config: {}
+config: {'env': {'base_width': 20, 'base_height': 20, 'expand_every': 5, 'green_apple_prob': 0.3}, 'rewards': {'red_apple': 10, 'green_apple': 20, 'death': -100, 'life_penalty': -0.1}, 'agent': {'learning_rate': 0.001, 'gamma': 0.9, 'epsilon_start': 1.0, 'epsilon_min': 0.01, 'epsilon_decay': 0.995, 'batch_size': 64, 'memory_size': 100000}, 'training': {'episodes': 500, 'render_every': 10, 'save_model': True}, 'wandb': {'use_wandb': True, 'project_name': 'Snake-DQN', 'run_name': 'test_run_1'}, '_wandb': {}}
+2026-05-09 12:23:32,758 INFO    MainThread:13840 [wandb_init.py:init():898] starting backend
+2026-05-09 12:23:35,358 INFO    MainThread:13840 [wandb_init.py:init():913] sending inform_init request
+2026-05-09 12:23:36,067 INFO    MainThread:13840 [wandb_init.py:init():918] backend started and connected
+2026-05-09 12:23:36,068 INFO    MainThread:13840 [wandb_init.py:init():988] updated telemetry
+2026-05-09 12:23:36,109 INFO    MainThread:13840 [wandb_init.py:init():1011] communicating run to backend with 90.0 second timeout
+2026-05-09 12:23:36,656 INFO    MainThread:13840 [wandb_init.py:init():1056] starting run threads in backend
+2026-05-09 12:23:37,218 INFO    MainThread:13840 [wandb_run.py:_console_start():2554] atexit reg
+2026-05-09 12:23:37,218 INFO    MainThread:13840 [wandb_run.py:_redirect():2403] redirect: wrap_raw
+2026-05-09 12:23:37,218 INFO    MainThread:13840 [wandb_run.py:_redirect():2472] Wrapping output streams.
+2026-05-09 12:23:37,218 INFO    MainThread:13840 [wandb_run.py:_redirect():2495] Redirects installed.
+2026-05-09 12:23:37,220 INFO    MainThread:13840 [wandb_init.py:init():1094] run started, returning control to user process
+2026-05-09 12:35:05,135 INFO    MainThread:13840 [wandb_run.py:_finish():2321] finishing run piotrhirkyj-politechnika-wroc-awska/Snake-DQN/q0074nal
+2026-05-09 12:35:05,136 INFO    MainThread:13840 [wandb_run.py:_atexit_cleanup():2520] got exitcode: 0
+2026-05-09 12:35:05,136 INFO    MainThread:13840 [wandb_run.py:_restore():2502] restore
+2026-05-09 12:35:05,136 INFO    MainThread:13840 [wandb_run.py:_restore():2508] restore done
+2026-05-09 12:35:06,204 INFO    MainThread:13840 [wandb_run.py:_footer_sync_info():3889] logging synced files

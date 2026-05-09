@@ -1,7 +1,6 @@
 import random
 import yaml
 import os
-import pygame
 
 
 class SnakeEngine:
@@ -107,61 +106,6 @@ class SnakeEngine:
             "map_width": self.map_width,
             "map_height": self.map_height,
         }
-    
-    def render(self):
-        MAX_WINDOW_SIZE = 800 
-
-        if not hasattr(self, 'window') or self.window is None:
-            pygame.init()
-            self.window = pygame.display.set_mode((MAX_WINDOW_SIZE, MAX_WINDOW_SIZE))
-            pygame.display.set_caption("Reinforced Snake")
-            self.clock = pygame.time.Clock()
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-
-        self.window.fill((20, 20, 20))
-
-        max_map_dimension = max(self.map_width, self.map_height)
-        
-        cell_size = int(MAX_WINDOW_SIZE / max_map_dimension)
-
-        if cell_size < 1:
-            cell_size = 1
-
-        pixel_map_width = self.map_width * cell_size
-        pixel_map_height = self.map_height * cell_size
-        
-        offset_x = (MAX_WINDOW_SIZE - pixel_map_width) // 2
-        offset_y = (MAX_WINDOW_SIZE - pixel_map_height) // 2
-
-        pygame.draw.rect(self.window, (30, 30, 30), 
-                         (offset_x, offset_y, pixel_map_width, pixel_map_height))
-
-        rx, ry, r_active = self.red_apple
-        if r_active:
-            pygame.draw.rect(self.window, (255, 50, 50), 
-                             (offset_x + rx * cell_size, offset_y + ry * cell_size, cell_size, cell_size))
-
-        gx, gy, g_active = self.green_apple
-        if g_active:
-            pygame.draw.rect(self.window, (50, 255, 50), 
-                             (offset_x + gx * cell_size, offset_y + gy * cell_size, cell_size, cell_size))
-
-        for i, (x, y) in enumerate(self.snake):
-            color = (0, 200, 255) if i == 0 else (0, 100, 200)
-            rect = (offset_x + x * cell_size, offset_y + y * cell_size, cell_size, cell_size)
-            pygame.draw.rect(self.window, color, rect)
-            
-            if cell_size > 4:
-                pygame.draw.rect(self.window, (0, 0, 0), rect, 1)
-
-        pygame.display.flip()
-        
-        self.clock.tick(15)
-
 
 
 if __name__ == "__main__":

@@ -4,23 +4,24 @@ import torch.optim as optim
 import random
 import numpy as np
 from agents.models.linear_net import LinearNet
-from agents.memory.memory import ReplayMemory
+from agents.memory import ReplayMemory
+
 
 class DQNAgent:
     def __init__(self, config):
-        self.learning_rate = config['agent']['learning_rate']
-        self.gamma = config['agent']['gamma']
-        self.epsilon = config['agent']['epsilon_start']
-        self.epsilon_min = config['agent']['epsilon_min']
-        self.epsilon_decay = config['agent']['epsilon_decay']
-        self.batch_size = config['agent']['batch_size']
+        self.learning_rate = config["agent"]["learning_rate"]
+        self.gamma = config["agent"]["gamma"]
+        self.epsilon = config["agent"]["epsilon_start"]
+        self.epsilon_min = config["agent"]["epsilon_min"]
+        self.epsilon_decay = config["agent"]["epsilon_decay"]
+        self.batch_size = config["agent"]["batch_size"]
 
         self.model = LinearNet()
-        self.memory = ReplayMemory(capacity=config['agent']['memory_size'])
+        self.memory = ReplayMemory(capacity=config["agent"]["memory_size"])
 
         self.optimizer = optim.Adam(self.model.parameters(), lr=self.learning_rate)
         self.criterion = nn.MSELoss()
-    
+
     def get_action(self, state):
         expl_prob = random.random()
         if expl_prob < self.epsilon:
@@ -30,11 +31,11 @@ class DQNAgent:
             q_values = self.model(state_tensor)
             action = torch.argmax(q_values).item()
             return action
-    
+
     def learn(self):
         if len(self.memory) < self.batch_size:
             return
-        
+
         batch = self.memory.sample(self.batch_size)
         states, actions, rewards, next_states, dones = zip(*batch)
 
@@ -57,4 +58,12 @@ class DQNAgent:
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
 
+    def load_model(self, file_path, is_training=False):
+        self.model.load_state_dict(torch.load(file_path))
 
+        if not is_training:
+            self.model.eval()
+            self.epsilon = 0.0
+        else:
+            self.model.train()
+            self.epsilon = max(self.epsilon_min, 0.05)
