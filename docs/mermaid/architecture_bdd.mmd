@@ -1,25 +1,48 @@
-graph TB
-    subgraph Environment_Module
-        E[engine.py]
-        SB[state_builder.py]
-        SE[snake_env.py]
+graph TD
+    %% Configurations
+    subgraph Configs ["Configurations (YAML)"]
+        A1[env_config.yaml]
+        A2[agent_config.yaml]
+        A3[train_config.yaml]
     end
 
-    subgraph Agent_Module
-        AG[dqn_agent.py]
-        M[memory.py]
-        NN[linear_net.py]
+    %% Entry Points
+    B[Entry: train.py or play.py] --> C[Trainer Class]
+    Configs -.->|Feeds data| C
+
+    %% Main Pipeline
+    subgraph Training Pipeline ["Orchestration"]
+        C -->|Instantiates| W[WandbLogger]
     end
 
-    subgraph Core
-        TR[train.py]
-        CFG[configs/]
+    %% Environment (Model)
+    subgraph Environment ["Environment (Gymnasium)"]
+        E1[SnakeEnv Wrapper]
+        E2[SnakeEngine Core Physics]
+        E3[StateBuilder Observation]
+        E1 -->|Calls logic| E2
+        E1 -->|Builds vector| E3
     end
 
-    TR --> SE
-    SE --> E
-    E --> SB
-    SB --> TR
-    TR --> AG
-    AG --> NN
-    AG --> M
+    %% Agent (AI)
+    subgraph AI Agent ["AI Agent (DQN)"]
+        D1[DQNAgent]
+        D2[Replay Memory Buffer]
+        D3[LinearNet PyTorch]
+        D1 -->|Reads and Writes| D2
+        D1 -->|Optimizes weights| D3
+    end
+
+    %% Visualization (View)
+    subgraph Visualisation ["Visualization (View)"]
+        V[PygameRenderer Graphics and HUD]
+    end
+
+    %% Core Relationships
+    C <-->|1. Action and Observation| E1
+    C <-->|2. Get Action and Learn| D1
+    C -->|3. Pass raw state| V
+    
+    %% External / MLOps
+    W -.->|Uploads metrics| Cloud[(Weights and Biases)]
+    D1 -.->|Save or Load pth| Models[(saved_models)]

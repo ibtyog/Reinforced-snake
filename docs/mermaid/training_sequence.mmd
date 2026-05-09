@@ -1,15 +1,37 @@
 sequenceDiagram
-    autonumber
-    participant T as Train/Orchestrator
-    participant E as SnakeEngine
-    participant S as StateBuilder
+    participant T as Trainer
+    participant E as SnakeEnv
     participant A as DQNAgent
+    participant M as Memory
+    participant N as LinearNet
+    participant R as PygameRenderer
+    participant W as WandbLogger
 
-    T->>E: step(action)
-    E->>E: update_physics()
-    E->>T: raw_game_data
-    T->>S: build_state(raw_data)
-    S->>T: feature_vector
-    T->>A: store_and_train(state, reward)
-    A->>A: optimize_model()
-    A->>T: next_action
+    Note over T: Initialization and Checkpoint resume
+    T->>E: reset()
+    E-->>T: obs, info
+    
+    loop While not done
+        T->>A: get_action(obs)
+        A-->>T: action
+        
+        T->>E: step(action)
+        Note right of E: Calculate physics and rewards
+        E-->>T: next_obs, reward, done, info
+        
+        T->>A: learn()
+        A->>M: push(obs, action, reward, next_obs, done)
+        
+        opt If enough samples in Memory
+            A->>M: Get Batch
+            A->>N: Backpropagation
+        end
+        
+        opt If episode modulo render_every is 0
+            T->>R: render(engine, stats)
+            R-->>T: Update Screen and HUD
+        end
+    end
+    
+    T->>W: log_episode(score, reward, epsilon)
+    Note over T, W: Save model if new High Score!

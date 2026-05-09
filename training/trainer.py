@@ -8,6 +8,15 @@ import re
 
 
 class Trainer:
+    """
+    Main orchestrator of the Machine Learning training pipeline.
+
+    Initializes the environment, agent, loggers, and renderer based on
+    YAML configurations. Manages the main training loop (episodes and steps),
+    handles data flow between the environment and the agent, and controls
+    the checkpointing (model save/resume) system.
+    """
+
     def __init__(self):
         self.config = self._load_all_configs()
         self.renderer = PygameRenderer()
