@@ -8,6 +8,15 @@ from agents.memory import ReplayMemory
 
 
 class DQNAgent:
+    """
+    Deep Q-Network (DQN) Agent.
+
+    Responsible for selecting actions based on environmental state vectors.
+    Manages the Replay Buffer for storing experiences and optimizes the
+    neural network weights using the Bellman equation. Balances exploration
+    and exploitation using an epsilon-greedy strategy.
+    """
+
     def __init__(self, config):
         self.learning_rate = config["agent"]["learning_rate"]
         self.gamma = config["agent"]["gamma"]

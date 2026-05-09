@@ -7,6 +7,15 @@ from env.state_builder import StateBuilder
 
 
 class SnakeEnv(Env):
+    """
+    Gymnasium-compliant environment wrapper.
+
+    Acts as a bridge between the core game physics (SnakeEngine) and the
+    AI Agent. Translates agent actions into game movements, retrieves the
+    raw state, builds the normalized observation vector, and calculates
+    the step rewards.
+    """
+
     def __init__(self, config):
         super().__init__()
 

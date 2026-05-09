@@ -4,6 +4,14 @@ import os
 
 
 class SnakeEngine:
+    """
+    Core physics engine for the Snake game (Model in MVC architecture).
+
+    Maintains the internal board state (snake body segments, apples).
+    Handles pure mathematics and game logic: collision detection, movement
+    resolution, and food generation. Contains absolutely no rendering logic.
+    """
+
     def __init__(self, config):
         self.config = config
         self.reset()

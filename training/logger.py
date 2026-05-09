@@ -2,6 +2,14 @@ import wandb
 
 
 class WandbLogger:
+    """
+    MLOps integration module for Weights & Biases (W&B).
+
+    Asynchronously logs training metrics (scores, total rewards, epsilon decay)
+    to the cloud. Allows for real-time monitoring, visualization, and
+    comparison of different experiments via a web dashboard.
+    """
+
     def __init__(self, config):
         self.use_wandb = config["wandb"].get("use_wandb", False)
 

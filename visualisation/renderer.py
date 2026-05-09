@@ -2,6 +2,14 @@ import pygame
 
 
 class PygameRenderer:
+    """
+    Pygame-based visualization module (View in MVC architecture).
+
+    Receives raw physical state data and renders it into a graphical window.
+    Handles dynamic camera scaling, object drawing, and generates a
+    Head-Up Display (HUD) overlay to show real-time training statistics.
+    """
+
     def __init__(self, max_window_size=800):
         self.max_window_size = max_window_size
         self.window = None
