@@ -42,7 +42,6 @@ class Trainer:
                 print(
                     f"Model file {model_name} not found. Starting training from scratch."
                 )
-                time.sleep(2)
 
     def _load_all_configs(self):
         base_dir = os.path.dirname(os.path.dirname(__file__))
