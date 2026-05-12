@@ -34,7 +34,7 @@ class DQNAgent:
     def get_action(self, state):
         expl_prob = random.random()
         if expl_prob < self.epsilon:
-            return random.randint(0, 2)
+            return random.choice([0, 2, 3])
         else:
             state_tensor = torch.tensor(state, dtype=torch.float32)
             q_values = self.model(state_tensor)
